@@ -360,12 +360,29 @@ class ComposerDeployer:
         
         print(f"✅ Deployment completed successfully!")
         print(f"📋 Next steps:")
-        print(f"   1. Go to Cloud Composer console")
-        print(f"   2. Access Airflow UI for environment: {self.environment_name}")
-        print(f"   3. Trigger 'skydag_pipeline' DAG directly (no setup needed)")
-        print(f"   4. Monitor execution and logs")
+        print(f"   1. Upload test files to input bucket:")
+        print(f"      gcloud storage cp test-data/test_records_10.csv gs://{self._get_suffixed_bucket('SKYDAG_SOURCE')}/input-files/")
+        print(f"   2. Trigger processing:")
+        print(f"      • CLI: python deploy.py trigger test_records_10.csv")
+        print(f"      • CLI: python deploy.py trigger  # (all files)")
+        print(f"      • UI: https://console.cloud.google.com/composer/environments?project={self.project_id}")
+        print(f"   3. Monitor results:")
+        print(f"      • Output: gs://{self._get_suffixed_bucket('SKYDAG_DEST')}/output-files/")
         
         return True
+    
+    def _get_suffixed_bucket(self, env_var: str) -> str:
+        """Get bucket name with project ID suffix applied"""
+        import os
+        bucket_spec = os.getenv(env_var, "")
+        if '/' in bucket_spec:
+            bucket_name = bucket_spec.split('/')[0]
+        else:
+            bucket_name = bucket_spec
+        
+        # Apply project ID suffix (same logic as config.py)
+        suffix = self.project_id.replace('-', '').replace('_', '').lower()
+        return f"{bucket_name}-{suffix}"
     
     def wait_for_dags_ready(self, timeout: int = 300) -> bool:
         """Wait for DAGs to be loaded and check for errors"""

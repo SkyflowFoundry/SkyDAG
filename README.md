@@ -28,7 +28,7 @@ SkyDAG is a complete implementation accelerator that packages Skyflow Detect cap
 Cloud Storage → SkyDAG Pipeline → Skyflow Detect API → Protected Data Storage
 ```
 
-1. **Ingestion**: Files uploaded to source bucket trigger processing
+1. **Ingestion**: Files uploaded to source bucket are processed via manual triggers
 2. **Detection**: Skyflow Detect identifies and classifies sensitive data
 3. **Protection**: Advanced tokenization de-identifies sensitive elements
 4. **Output**: Protected files written to destination storage with full audit trail 
@@ -97,26 +97,48 @@ python deploy.py deploy
 - **Duration**: ~2 minutes
 - **Uploads**: DAG files, sets Airflow Variables, verifies deployment
 
-#### Step 3: Upload Test Data (Manual)
+#### Step 3: Upload Test Data & Trigger Processing
+
+**Option A: Command Line Triggering (Recommended)**
 ```bash
-gcloud storage cp test-data/test_records_10.csv gs://skydag-test-source/input-files/
+# Upload test file to input bucket
+gcloud storage cp test-data/test_records_10.csv gs://my-source-bucket-solutionseng/input-files/
+
+# Trigger processing via CLI
+python deploy.py trigger test_records_10.csv  # Process single file
+python deploy.py trigger                      # Process all files in bucket
 ```
 
-#### Step 4: Trigger Pipeline
+**Option B: Manual Upload & Airflow UI Triggering**
 ```bash
-# Process single file
-python deploy.py trigger test_records_10.csv
+# 1. Upload files to input bucket
+gcloud storage cp test-data/*.csv gs://my-source-bucket-solutionseng/input-files/
 
-# Process all files in source bucket
-python deploy.py trigger
+# 2. Go to Cloud Composer console to trigger DAG
+# https://console.cloud.google.com/composer/environments?project=YOUR_PROJECT_ID
 ```
 
-#### Step 5: Monitor & Results
-- **Airflow UI**: Monitor DAG execution progress
-- **Results**: Check `gs://skydag-test-dest/output-files/` for processed files
-- **Logs**: View task logs for detailed processing information
 
-#### Step 6: Cleanup (Optional)
+#### Step 4: Monitor & Results
+
+**Quick Access Links:**
+- **Input Bucket**: `https://console.cloud.google.com/storage/browser/my-source-bucket-solutionseng/input-files?project=YOUR_PROJECT_ID`
+- **Output Bucket**: `https://console.cloud.google.com/storage/browser/my-dest-bucket-solutionseng/output-files?project=YOUR_PROJECT_ID`  
+- **Composer Console**: `https://console.cloud.google.com/composer/environments?project=YOUR_PROJECT_ID`
+
+**Manual Triggering via Airflow UI:**
+1. Go to [Cloud Composer Console](https://console.cloud.google.com/composer/environments)
+2. Click "Open Airflow UI" for your environment
+3. Find and click `skydag_pipeline` DAG
+4. Click "Trigger DAG" (processes all files) or "Trigger w/ Config" (specify single file)
+5. Monitor execution progress and logs
+
+**Monitoring Options:**
+- **Airflow UI**: Real-time task progress and logs (`skydag_pipeline` DAG)
+- **Cloud Console**: View processed files in output bucket
+- **Command Line**: `python deploy.py status` for deployment info
+
+#### Step 5: Cleanup (Optional)
 ```bash
 python deploy.py undeploy  # Remove DAGs only
 python deploy.py destroy   # Remove all infrastructure
@@ -168,6 +190,7 @@ DEPLOY_DAG_BUCKET=your-dags-bucket
 ```
 
 See `.env.local.example` for complete configuration options.
+
 
 ## Advanced Usage
 
