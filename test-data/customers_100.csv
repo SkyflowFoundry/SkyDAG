@@ -99,5 +99,4 @@ FR-CUST00000097,FR,Sam,Thompson,ms4eww4ig9@example.com,+33 4 71 51 86 03,MID,Mor
 CUST00000098-CA,CA,Parker,Garcia,99yrfs28q7@sample.org,+1-442-452-9165,CORP,Retail Checking,Platinum,5181362037136168,Branch,Medium,Paper,NA,crm,Usage-Based,2004-10-05,146 Avenue Victor Hugo,Strasbourg
 CUST00000099,FR,Sam,Miller,5se8kkbgr4@example.com,+33 5 23 86 17 86,CORP,Investment Advisory,Platinum,1462847407021327,Branch,Low,E-Statement,EU,crm,Flat,1940-10-13,9144 Elm St,Phoenix
 CUST00000100-CN,CN,浩,周,c6ao97dse8@example.com,+86 18269002498,CORP,Investment Advisory,Silver,627611309270952397,Branch,Medium,E-Statement,APAC,legacy_core,Flat,1973-06-08,建设路690号,深圳
-CUST00000002,CA,强,张,e28rpen8ew@mail.test,+1-397-251-7859,SMB,Commercial Loan,Private,4133416593178625,RM Assisted,High,Paper,NA,legacy_core,Flat,2002-09-10,6616 Willow Dr,Chicago
-FR-CUST00000003,FR,Logan,Garcia,rpoxab2znl@mail.test,+33 7 81 89 51 18,SMB,Retail Checking,Private,2954634869468518,Branch,Medium,Paper,EU,branch_import,Usage-Based,1977-06-26,人民路580号,杭州
+US-CUST00000001,US,勇,杨,cemrs5llg1@example.com,+1-654-684-2607,SMB,Commercial Loan,Platinum,8965040177076991,Branch,High,E-Statement,NA,online_signup,Flat,1984-06-17,7404 Birch Way,Atlanta
