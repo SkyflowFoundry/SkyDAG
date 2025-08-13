@@ -3,7 +3,7 @@ CUST00000001,FR,Quinn,Davis,flik8i7vh7@sample.org,+33 9 32 43 07 80,SMB,Mortgage
 CUST00000002,CA,强,张,e28rpen8ew@mail.test,+1-397-251-7859,SMB,Commercial Loan,Private,1299131100602940,RM Assisted,High,Paper,NA,legacy_core,Flat,2002-09-10,6616 Willow Dr,Chicago
 FR-CUST00000003,FR,Logan,Garcia,rpoxab2znl@mail.test,+33 7 81 89 51 18,SMB,Retail Checking,Private,1182073578469893,Branch,Medium,Paper,EU,branch_import,Usage-Based,1977-06-26,人民路580号,杭州
 FR-CUST00000004,FR,Riley,Martin,cjm8idmmnu@sample.org,+33 2 14 69 10 90,MID,Investment Advisory,Gold,1398887280011407,Online,High,Paper,EU,legacy_core,Usage-Based,1982-11-06,6 Rue de la Paix,Bordeaux
-US-CUST00000005,US,Inès,Leroy,t4nvjn8ueg@mail.test,+1-948-230-8676,SMB,Investment Advisory,Platinum,4810653625098438,Branch,Medium,Paper,NA,legacy_core,Flat,1985-04-17,中山路988号,杭州
+US-CUST00000005,US,Inès,Leroy,t4nvjn8ueg@mail.test,+1-948-230-8676,SMB,Investment Advisory,Platinum,757803630636478707,Branch,Medium,Paper,NA,legacy_core,Flat,1985-04-17,中山路988号,杭州
 CUST00000006-CA,CA,强,陈,7ap9q34klx@example.com,+1-515-997-6738,MID,Commercial Loan,Private,1721916902402231,Online,Low,Paper,NA,legacy_core,Flat,1944-12-08,118 Rue de la République,Lyon
 CUST00000007,CN,Parker,Thompson,aqhnyazpab@example.com,+86 16140193856,SMB,Wealth Mgmt,Gold,621959888773380113,Mobile,Medium,E-Statement,APAC,legacy_core,Usage-Based,1973-09-02,1565 Willow Dr,Seattle
 CUST00000008,US,娜,王,ecdsuf9ckd@sample.org,+1-200-701-3399,MID,Commercial Loan,Bronze,8174261010795419,RM Assisted,Low,Paper,NA,online_signup,Tiered,2005-09-08,188 Avenue Victor Hugo,Toulouse
