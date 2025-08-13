@@ -450,6 +450,7 @@ class GCPInfrastructure:
             # Create environment using gcloud CLI
             print(f"🎵 Creating Composer environment: {env_name}")
             print("⏳ This may take 20-45 minutes...")
+            print(f"💡 You can monitor progress at: https://console.cloud.google.com/composer/environments?project={self.project_id}")
             
             # Validate environment name format
             if not env_name.replace('-', '').replace('_', '').isalnum():
@@ -835,6 +836,7 @@ class GCPInfrastructure:
                 if not resource["data"].get("exists", False):
                     print(f"🎵 Deleting Composer environment: {env_name}")
                     print("⏳ This may take 10-20 minutes...")
+                    print(f"💡 You can monitor progress at: https://console.cloud.google.com/composer/environments?project={self.project_id}")
                     
                     import subprocess
                     delete_cmd = [
