@@ -52,6 +52,27 @@ def setup_infrastructure(config: DeploymentConfig, skip_deps: bool = False) -> b
         return False
 
 
+def undeploy_and_destroy(config: DeploymentConfig, dags_path: Path) -> bool:
+    """Complete teardown: undeploy DAGs then destroy infrastructure"""
+    print("🗑️ Starting complete teardown: undeploy + destroy")
+    print("=" * 50)
+    
+    # Step 1: Undeploy DAGs and clean up files
+    print("📋 Step 1/2: Undeploying DAGs and cleaning up files...")
+    try:
+        undeploy_success = deploy_to_platform(config, dags_path, "undeploy")
+        if not undeploy_success:
+            print("⚠️  Undeploy failed, but continuing with infrastructure destruction...")
+    except Exception as e:
+        print(f"⚠️  Undeploy error: {e}, continuing with infrastructure destruction...")
+    
+    print("\n" + "=" * 50)
+    
+    # Step 2: Destroy infrastructure
+    print("💥 Step 2/2: Destroying infrastructure...")
+    return destroy_infrastructure(config)
+
+
 def destroy_infrastructure(config: DeploymentConfig) -> bool:
     """Destroy complete infrastructure atomically"""
     state = DeploymentState(config)
@@ -183,9 +204,10 @@ Examples:
   python -m deploy.cli deps      # Check and install dependencies
   
   # Infrastructure management
-  python -m deploy.cli setup     # Create complete infrastructure
-  python -m deploy.cli destroy   # Destroy all infrastructure
-  python -m deploy.cli status    # Show deployment status
+  python -m deploy.cli setup                 # Create complete infrastructure
+  python -m deploy.cli destroy               # Destroy all infrastructure
+  python -m deploy.cli undeploy-and-destroy  # Undeploy DAGs then destroy infrastructure
+  python -m deploy.cli status                # Show deployment status
   
   # DAG deployment (requires infrastructure)
   python -m deploy.cli deploy    # Deploy everything
@@ -202,7 +224,7 @@ Examples:
     
     parser.add_argument(
         "action",
-        choices=["setup", "destroy", "status", "deploy", "undeploy", "upload", "variables", "trigger", "deps"],
+        choices=["setup", "destroy", "undeploy-and-destroy", "status", "deploy", "undeploy", "upload", "variables", "trigger", "deps"],
         help="Action to perform"
     )
     
@@ -246,7 +268,7 @@ Examples:
     args = parser.parse_args()
     
     # Validate dags path for DAG operations only
-    dag_operations = ["deploy", "undeploy", "upload", "variables", "trigger"]
+    dag_operations = ["deploy", "undeploy", "undeploy-and-destroy", "upload", "variables", "trigger"]
     if args.action in dag_operations:
         if not args.dags_path.exists():
             print(f"❌ DAGs path does not exist: {args.dags_path}")
@@ -294,6 +316,8 @@ Examples:
             success = setup_infrastructure(config, args.skip_deps)
         elif args.action == "destroy":
             success = destroy_infrastructure(config)
+        elif args.action == "undeploy-and-destroy":
+            success = undeploy_and_destroy(config, args.dags_path)
         elif args.action == "status":
             success = show_status(config)
         else:

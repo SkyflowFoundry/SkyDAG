@@ -140,8 +140,10 @@ gcloud storage cp test-data/*.csv gs://my-source-bucket-solutionseng/input-files
 
 #### Step 5: Cleanup (Optional)
 ```bash
-python deploy.py undeploy  # Remove DAGs only
-python deploy.py destroy   # Remove all infrastructure
+python deploy.py undeploy-and-destroy  # Complete teardown (recommended)
+# OR run separately:
+python deploy.py undeploy               # Remove DAGs only
+python deploy.py destroy                # Remove infrastructure only
 ```
 
 ## Platform Support
@@ -192,21 +194,33 @@ DEPLOY_DAG_BUCKET=your-dags-bucket
 See `.env.local.example` for complete configuration options.
 
 
-## Advanced Usage
+## Available Actions
 
+### Infrastructure Management
 ```bash
-# Infrastructure management
-python deploy.py setup      # Create all infrastructure 
-python deploy.py destroy    # Destroy all infrastructure
-python deploy.py status     # Show deployment status
+python deploy.py setup                 # Create all infrastructure 
+python deploy.py destroy               # Destroy infrastructure only
+python deploy.py undeploy-and-destroy  # Complete teardown (undeploy → destroy)
+python deploy.py status                # Show deployment status
+```
 
-# DAG management  
-python deploy.py upload     # Upload DAG files only
-python deploy.py variables  # Set Airflow Variables only
-python deploy.py undeploy   # Remove DAGs with cleanup
+### DAG Deployment
+```bash
+python deploy.py deploy    # Deploy everything (upload + variables)
+python deploy.py undeploy  # Remove DAGs with cleanup
+python deploy.py upload    # Upload DAG files only
+python deploy.py variables # Set Airflow Variables only
+```
 
-# Development
-python deploy.py dependencies  # Check/install dependencies
+### Processing
+```bash
+python deploy.py trigger filename.csv  # Process single file
+python deploy.py trigger               # Process all files in bucket
+```
+
+### Development
+```bash
+python deploy.py deps      # Check/install dependencies
 ```
 
 ## Important Notes
