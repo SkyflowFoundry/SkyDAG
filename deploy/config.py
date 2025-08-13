@@ -31,15 +31,7 @@ class DeploymentConfig:
         self.platform = self._get_required("DEPLOY_PLATFORM")
         self.environment = self._get_optional("DEPLOY_ENVIRONMENT", "dev")
         
-        # Generate consistent bucket suffix for this deployment
-        self._bucket_suffix = self._generate_bucket_suffix()
-        
-        # Common settings  
-        dag_bucket = self._get_required("DEPLOY_DAG_BUCKET")
-        self.dag_bucket_or_container = f"{dag_bucket}-{self._bucket_suffix}"
-        self.dag_prefix = self._get_optional("DEPLOY_DAG_PREFIX", "dags")
-        
-        # Platform-specific configs
+        # Platform-specific configs (must be set before bucket suffix generation)
         if self.platform.lower() == "gcp":
             self._setup_gcp_config()
         elif self.platform.lower() == "aws":
@@ -48,6 +40,14 @@ class DeploymentConfig:
             self._setup_azure_config()
         else:
             raise ValueError(f"Unsupported deployment platform: {self.platform}")
+        
+        # Generate consistent bucket suffix for this deployment (after platform config)
+        self._bucket_suffix = self._generate_bucket_suffix()
+        
+        # Common settings  
+        dag_bucket = self._get_required("DEPLOY_DAG_BUCKET")
+        self.dag_bucket_or_container = f"{dag_bucket}-{self._bucket_suffix}"
+        self.dag_prefix = self._get_optional("DEPLOY_DAG_PREFIX", "dags")
     
     def _get_required(self, key: str) -> str:
         """Get required environment variable"""
