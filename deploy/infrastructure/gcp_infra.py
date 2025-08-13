@@ -639,6 +639,31 @@ class GCPInfrastructure:
                 else:
                     print(f"✅ Granted role {role}")
             
+            # Grant current user permission to use service accounts (fixes Composer creation)
+            print(f"🔐 Granting service account user permission to current user...")
+            user_cmd = [
+                "gcloud", "config", "get-value", "core/account"
+            ]
+            
+            user_result = subprocess.run(user_cmd, capture_output=True, text=True, timeout=30)
+            if user_result.returncode == 0 and user_result.stdout.strip():
+                current_user = user_result.stdout.strip()
+                print(f"🔐 Current user: {current_user}")
+                
+                user_grant_cmd = [
+                    "gcloud", "projects", "add-iam-policy-binding", self.project_id,
+                    "--member", f"user:{current_user}",
+                    "--role", "roles/iam.serviceAccountUser"
+                ]
+                
+                user_grant_result = subprocess.run(user_grant_cmd, capture_output=True, text=True, timeout=60)
+                if user_grant_result.returncode == 0:
+                    print(f"✅ Granted service account user permission to {current_user}")
+                else:
+                    print(f"⚠️  Warning: Failed to grant service account user permission: {user_grant_result.stderr or user_grant_result.stdout}")
+            else:
+                print(f"⚠️  Warning: Could not determine current user account")
+            
             return service_account_email
             
         except Exception as e:
@@ -941,6 +966,33 @@ class GCPInfrastructure:
                     print(f"✅ Removed role {role}")
                 else:
                     print(f"⚠️  Failed to remove role {role}: {result.stderr or result.stdout}")
+                    
+            # Also remove service account user permission from current user
+            print(f"🔐 Removing service account user permission from current user...")
+            user_cmd = [
+                "gcloud", "config", "get-value", "core/account"
+            ]
+            
+            user_result = subprocess.run(user_cmd, capture_output=True, text=True, timeout=30)
+            if user_result.returncode == 0 and user_result.stdout.strip():
+                current_user = user_result.stdout.strip()
+                print(f"🔐 Current user: {current_user}")
+                
+                user_remove_cmd = [
+                    "gcloud", "projects", "remove-iam-policy-binding", self.project_id,
+                    "--member", f"user:{current_user}",
+                    "--role", "roles/iam.serviceAccountUser",
+                    "--quiet"
+                ]
+                
+                user_remove_result = subprocess.run(user_remove_cmd, capture_output=True, text=True, timeout=60)
+                if user_remove_result.returncode == 0:
+                    print(f"✅ Removed service account user permission from {current_user}")
+                else:
+                    print(f"⚠️  Warning: Failed to remove service account user permission: {user_remove_result.stderr or user_remove_result.stdout}")
+            else:
+                print(f"⚠️  Warning: Could not determine current user account for cleanup")
+                
         except Exception as e:
             print(f"⚠️  Error removing service account roles: {e}")
     
