@@ -1,12 +1,37 @@
 # SkyDAG
 
-An Airflow pipeline for processing files from cloud storage through Skyflow's detection API.
+**A packaged accelerator for automated data protection at scale using Skyflow Detect.**
 
-## What it does
+## About Skyflow Detect
 
-1. Ingests files in cloud storage buckets
-2. Processes each file in parallel through Skyflow Detect API for Deidentification (Tokenization)
-3. Writes processed results to destination storage 
+Skyflow Detect is a data protection service that automatically identifies, classifies, and de-identifies sensitive data across your files and data pipelines. Built on Skyflow's Data Privacy Vault, it provides:
+
+- **Intelligent PII Detection**: Automatically discovers 50+ types of sensitive data including names, SSNs, credit cards, medical records, and custom patterns
+- **Advanced De-identification**: Multiple tokenization strategies including format-preserving tokens, vault tokens, and entity counters
+- **Enterprise-Grade Security**: Zero-trust architecture with end-to-end encryption and compliance with SOC 2, PCI DSS, HIPAA, and GDPR
+- **API-First Design**: RESTful APIs for seamless integration into existing data workflows and pipelines
+
+## What SkyDAG Does
+
+SkyDAG is a complete implementation accelerator that packages Skyflow Detect capabilities within a fully deployable Apache Airflow DAG, enabling:
+
+1. **Automated File Processing**: Monitors cloud storage buckets and automatically processes new files
+2. **Parallel Data Protection**: Processes multiple files simultaneously through Skyflow Detect API with intelligent tokenization
+3. **Smart Token Selection**: Automatically selects appropriate token types based on file format (vault tokens for text, entity counters for binary)
+4. **Production Infrastructure**: Complete cloud deployment with managed Airflow (Composer/MWAA), storage, and IAM
+5. **Fault Tolerance**: Individual file failures don't block processing of other files
+6. **Enterprise Monitoring**: Full observability through Airflow UI and cloud monitoring services
+
+### Core Workflow
+
+```
+Cloud Storage → SkyDAG Pipeline → Skyflow Detect API → Protected Data Storage
+```
+
+1. **Ingestion**: Files uploaded to source bucket trigger processing
+2. **Detection**: Skyflow Detect identifies and classifies sensitive data
+3. **Protection**: Advanced tokenization de-identifies sensitive elements
+4. **Output**: Protected files written to destination storage with full audit trail 
 
 ## Quick Start
 
@@ -35,6 +60,26 @@ An Airflow pipeline for processing files from cloud storage through Skyflow's de
    # Azure (coming soon) 
    # az login
    ```
+
+### Required GCP Permissions
+
+Your GCP account needs the following IAM roles for SkyDAG operations:
+
+**Core Roles:**
+- `Composer Administrator` - Manage Composer environments
+- `Storage Admin` - Create and manage buckets
+- `Service Account Admin` - Create service accounts
+- `Project IAM Admin` - Assign IAM permissions
+
+**API Requirements:**
+These APIs must be enabled in your GCP project:
+- Cloud Composer API (`composer.googleapis.com`)
+- Cloud Storage API (`storage.googleapis.com`)
+- Identity and Access Management API (`iam.googleapis.com`)
+- Service Usage API (`serviceusage.googleapis.com`)
+- Resource Manager API (`cloudresourcemanager.googleapis.com`)
+
+**Alternative:** Use `Owner` or `Editor` project-level role (includes all required permissions)
 
 ### End-to-End Workflow
 
@@ -144,6 +189,7 @@ python deploy.py dependencies  # Check/install dependencies
 ## Important Notes
 
 - **Processing**: Each file processed independently - failures don't block others
+- **Bucket Names**: A unique 5-character suffix is automatically added to prevent naming conflicts
 - **State Management**: Uses `.skydag_state.json` for deployment tracking
 - **Cost Awareness**: Cloud resources incur costs - use `destroy` when done
 - **File Size**: Base64 encoding inflates file size by ~33%

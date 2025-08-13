@@ -1,5 +1,7 @@
 """Deployment configuration management"""
 import os
+import random
+import string
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -29,8 +31,12 @@ class DeploymentConfig:
         self.platform = self._get_required("DEPLOY_PLATFORM")
         self.environment = self._get_optional("DEPLOY_ENVIRONMENT", "dev")
         
-        # Common settings
-        self.dag_bucket_or_container = self._get_required("DEPLOY_DAG_BUCKET")
+        # Generate consistent bucket suffix for this deployment
+        self._bucket_suffix = self._generate_bucket_suffix()
+        
+        # Common settings  
+        dag_bucket = self._get_required("DEPLOY_DAG_BUCKET")
+        self.dag_bucket_or_container = f"{dag_bucket}-{self._bucket_suffix}"
         self.dag_prefix = self._get_optional("DEPLOY_DAG_PREFIX", "dags")
         
         # Platform-specific configs
@@ -78,17 +84,44 @@ class DeploymentConfig:
         self.azure_client_id = self._get_optional("AZURE_CLIENT_ID")
         self.azure_client_secret = self._get_optional("AZURE_CLIENT_SECRET")
     
+    def _generate_bucket_suffix(self) -> str:
+        """Generate a consistent suffix using GCP project ID"""
+        if self.platform.lower() == "gcp":
+            # Use GCP project ID as suffix (already alphanumeric and unique)
+            return self.gcp_project.replace('-', '').replace('_', '').lower()
+        
+        # Fallback for other platforms - use deployment ID or random
+        try:
+            from .infrastructure.state import DeploymentState
+            state = DeploymentState()
+            if state.state.get("deployment_id"):
+                deployment_id = state.state["deployment_id"]
+                clean_id = ''.join(c for c in deployment_id if c.isalnum()).lower()
+                if len(clean_id) >= 5:
+                    return clean_id[-8:]  # Use 8 chars for non-GCP
+        except:
+            pass
+        
+        return ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+    
+    def _add_bucket_suffix(self, bucket_spec: str) -> str:
+        """Add suffix to bucket name in bucket/prefix format"""
+        if not bucket_spec or '/' not in bucket_spec:
+            return bucket_spec
+            
+        bucket_name, prefix = bucket_spec.split('/', 1)
+        suffixed_bucket = f"{bucket_name}-{self._bucket_suffix}"
+        return f"{suffixed_bucket}/{prefix}"
+    
     def get_airflow_variables(self) -> Dict[str, str]:
-        """Get Airflow Variables to set remotely"""
+        """Get Airflow Variables to set remotely (with bucket suffixes applied)"""
         variables = {}
         
         # Core SkyDAG variables
         skydag_vars = [
             "SKYDAG_PLATFORM",
-            "SKYDAG_SOURCE", 
-            "SKYDAG_DEST",
             "SKYDAG_POLL_MAX_WAIT",
-            "SKYDAG_POLL_INITIAL",
+            "SKYDAG_POLL_INITIAL", 
             "SKYDAG_POLL_BACKOFF", 
             "SKYDAG_POLL_MAX_INTERVAL"
         ]
@@ -100,9 +133,19 @@ class DeploymentConfig:
             "SKYFLOW_AUTH_HEADER"
         ]
         
+        # Regular variables (no bucket suffix needed)
         for var in skydag_vars + skyflow_vars:
             value = os.getenv(var)
             if value:
                 variables[var] = value
+        
+        # Special handling for bucket variables (add suffix)
+        source_spec = os.getenv("SKYDAG_SOURCE")
+        if source_spec:
+            variables["SKYDAG_SOURCE"] = self._add_bucket_suffix(source_spec)
+            
+        dest_spec = os.getenv("SKYDAG_DEST")
+        if dest_spec:
+            variables["SKYDAG_DEST"] = self._add_bucket_suffix(dest_spec)
         
         return variables

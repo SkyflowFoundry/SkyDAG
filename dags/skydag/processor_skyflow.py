@@ -77,12 +77,32 @@ class SkyflowProcessor:
         }
         data_format = format_mapping.get(file_ext, file_ext or 'txt')
         
-        # Use actual Skyflow API format from .env.local.bak
+        # Determine token type based on file type
+        text_based_extensions = {'csv', 'json', 'txt', 'xml', 'tsv', 'log', 'sql', 'yaml', 'yml'}
+        if file_ext in text_based_extensions:
+            token_type_config = {
+                "entity_only": [],
+                "entity_unq_counter": [],
+                "default": "vault_token"
+            }
+        else:
+            # Binary files (pdf, docx, png, jpg, etc.)
+            token_type_config = {
+                "entity_only": [],
+                "entity_unq_counter": [],
+                "default": "entity_unq_counter"
+            }
+        
+        # Enhanced API format with vault_token support
         data = {
             "file": {
                 "base64": payload_b64,
                 "data_format": data_format
             },
+            "entity_types": ["all"],
+            "token_type": token_type_config,
+            "restrict_regex": [],
+            "allow_regex": [],
             "vault_id": vault_id
         }
         
@@ -90,6 +110,7 @@ class SkyflowProcessor:
         logger.info(f"🔗 API Endpoint: {self.start_url}")
         logger.info(f"📦 Payload size: {len(payload_b64)} characters")
         logger.info(f"📄 Data format: {data_format} (from extension: {file_ext})")
+        logger.info(f"🔑 Token type: {token_type_config['default']} ({'text-based' if file_ext in text_based_extensions else 'binary'} file)")
         logger.info(f"📋 Request headers: {headers}")
         logger.info(f"📋 Request data keys: {list(data.keys())}")
         

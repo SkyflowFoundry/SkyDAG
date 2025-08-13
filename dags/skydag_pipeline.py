@@ -25,8 +25,8 @@ DEFAULT_CONFIG = {
     "SKYDAG_POLL_INITIAL": os.getenv("SKYDAG_POLL_INITIAL", "2.0"),
     "SKYDAG_POLL_BACKOFF": os.getenv("SKYDAG_POLL_BACKOFF", "1.7"),
     "SKYDAG_POLL_MAX_INTERVAL": os.getenv("SKYDAG_POLL_MAX_INTERVAL", "20.0"),
-    "SKYFLOW_START_URL": os.getenv("SKYFLOW_START_URL", "https://ebfc9bee4242.vault.skyflowapis.com/v1/detect/deidentify/file"),
-    "SKYFLOW_POLL_URL_TEMPLATE": os.getenv("SKYFLOW_POLL_URL_TEMPLATE", "https://ebfc9bee4242.vault.skyflowapis.com/v1/detect/runs/{run_id}?vault_id=a55459f3681948a1baf6756d28f62993"),  
+    "SKYFLOW_START_URL": os.getenv("SKYFLOW_START_URL"),
+    "SKYFLOW_POLL_URL_TEMPLATE": os.getenv("SKYFLOW_POLL_URL_TEMPLATE"),  
     "SKYFLOW_AUTH_HEADER": os.getenv("SKYFLOW_AUTH_HEADER")
 }
 
