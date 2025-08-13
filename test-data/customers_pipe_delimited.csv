@@ -1,6 +1,0 @@
-customer_id|country|first_name|last_name|date_of_birth|email|phone|address|city|ssn
-US-CUST00000001|US|Michael|Johnson|1985-03-15|mjohnson@example.com|+1-555-123-4567|123 Main Street, Apt 4B|New York|123-45-6789
-US-CUST00000002|US|Sarah|Williams|1992-07-22|swilliams@example.com|+1-555-987-6543|456 Oak Avenue, Suite 200|Los Angeles|987-65-4321
-US-CUST00000003|US|David|Brown|1978-11-08|dbrown@example.com|+1-555-555-0123|789 Pine Street, Unit 15|Chicago|555-12-3456
-US-CUST00000004|US|Jennifer|Davis|1990-05-30|jdavis@example.com|+1-555-444-7890|321 Elm Drive, Floor 3|Houston|444-78-9012
-US-CUST00000005|US|Robert|Miller|1983-09-14|rmiller@example.com|+1-555-333-2468|654 Maple Lane, Apt 7|Phoenix|333-24-6810
