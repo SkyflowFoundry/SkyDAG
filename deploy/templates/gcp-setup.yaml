@@ -1,0 +1,80 @@
+# GCP Infrastructure Configuration Template
+# This file documents the resources that will be created
+
+infrastructure:
+  platform: gcp
+  region: us-central1
+  project: your-gcp-project
+
+resources:
+  storage:
+    - name: "${DEPLOY_DAG_BUCKET}"
+      type: bucket
+      description: "DAG files storage for Airflow"
+      location: "${DEPLOY_GCP_REGION}"
+      labels:
+        skydag-deployment: "${DEPLOYMENT_ID}"
+        skydag-type: "dag-bucket"
+        created-by: "skydag"
+    
+    - name: "${SKYDAG_SOURCE_BUCKET}"
+      type: bucket
+      description: "Source files for processing"
+      location: "${DEPLOY_GCP_REGION}"
+      labels:
+        skydag-deployment: "${DEPLOYMENT_ID}"
+        skydag-type: "source-bucket"
+        created-by: "skydag"
+    
+    - name: "${SKYDAG_DEST_BUCKET}"
+      type: bucket
+      description: "Processed files destination"
+      location: "${DEPLOY_GCP_REGION}"
+      labels:
+        skydag-deployment: "${DEPLOYMENT_ID}"
+        skydag-type: "dest-bucket"
+        created-by: "skydag"
+
+  composer:
+    - name: "${DEPLOY_COMPOSER_ENVIRONMENT}"
+      type: environment
+      description: "Cloud Composer environment for Airflow"
+      location: "${DEPLOY_GCP_REGION}"
+      config:
+        node_count: 3
+        machine_type: "e2-medium"
+        disk_size_gb: 30
+        environment_size: "ENVIRONMENT_SIZE_SMALL"
+        software_config:
+          image_version: "composer-2-airflow-2"
+          python_version: "3"
+          airflow_config_overrides:
+            core-load_examples: "False"
+            webserver-expose_config: "True"
+      labels:
+        skydag-deployment: "${DEPLOYMENT_ID}"
+        created-by: "skydag"
+
+  iam:
+    - description: "Service account permissions for Composer and storage access"
+      permissions:
+        - "roles/storage.admin"
+        - "roles/composer.worker"
+
+estimated_costs:
+  composer_environment:
+    description: "Cloud Composer environment (small)"
+    cost_per_hour: "$0.50 - $1.00"
+    notes: "Includes 3 e2-medium nodes"
+  
+  storage:
+    description: "Cloud Storage buckets"
+    cost_per_gb_month: "$0.020"
+    notes: "Standard storage class"
+
+deployment_time:
+  total: "20-45 minutes"
+  breakdown:
+    storage_buckets: "1-2 minutes"
+    composer_environment: "20-45 minutes"
+    iam_setup: "1-2 minutes"

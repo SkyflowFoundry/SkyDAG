@@ -1,0 +1,11 @@
+customer_id,country_code,first_name,last_name,date_of_birth,email,phone,address_line1,city,account_number
+US-CUST00000001,US,Riley,Williams,1942-02-16,divuzzpqk5@example.com,+1-914-632-6574,1689 2nd St,Chicago,227133320419
+US-CUST00000002,US,Lucas,Lefebvre,1955-04-08,kcidkwnnhj@sample.org,+1-863-273-3803,592号建设路,上海,524296237088
+CUST00000003,CN,Sam,Garcia,1983-01-26,ff0t0pvn9e@mail.test,+86 17685420248,3493 Sunset Blvd,Denver,016740395980
+US-CUST00000004,US,Manon,Lefebvre,1940-03-20,zz81sdw4sh@mail.test,+1-980-365-9837,124 Boulevard Saint-Germain,Toulouse,999541398225
+CUST00000005,US,Jordan,Wilson,1951-01-23,sv871yzoyn@sample.org,+1-662-323-5061,2070 Pine Rd,Miami,235220629802
+CUST00000006,CN,Sam,Anderson,1952-10-03,dppq0y9dom@example.com,+86 14067970820,7754 Cedar Ln,Miami,144229485098
+CUST00000007,US,磊,赵,2000-06-17,fao72kz02x@mail.test,+1-358-394-5861,498号文化路,深圳,207030495058
+US-CUST00000008,US,Thomas,Leroy,1942-08-30,cxuljyljex@mail.test,+1-523-969-2188,132 Rue de Rivoli,Lyon,065055130224
+CUST00000009,FR,Inès,Dubois,1948-12-30,edtjvzhwjr@example.com,+33 2 64 00 52 42,684号胜利路,上海,754008958511
+FR-CUST00000010,FR,Avery,Garcia,1977-07-05,5907if2gog@mail.test,+33 7 34 21 60 73,216号建设路,上海,193882632073

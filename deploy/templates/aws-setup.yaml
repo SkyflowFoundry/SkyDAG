@@ -1,0 +1,107 @@
+# AWS Infrastructure Configuration Template
+# This file documents the resources that will be created
+
+infrastructure:
+  platform: aws
+  region: us-east-1
+  
+resources:
+  storage:
+    - name: "${DEPLOY_DAG_BUCKET}"
+      type: s3-bucket
+      description: "DAG files storage for MWAA"
+      region: "${DEPLOY_AWS_REGION}"
+      versioning: enabled
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        SkyDAG-Type: "dag-bucket"
+        Created-By: "skydag"
+    
+    - name: "${SKYDAG_SOURCE_BUCKET}"
+      type: s3-bucket
+      description: "Source files for processing"
+      region: "${DEPLOY_AWS_REGION}"
+      versioning: enabled
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        SkyDAG-Type: "source-bucket"
+        Created-By: "skydag"
+    
+    - name: "${SKYDAG_DEST_BUCKET}"
+      type: s3-bucket
+      description: "Processed files destination"
+      region: "${DEPLOY_AWS_REGION}"
+      versioning: enabled
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        SkyDAG-Type: "dest-bucket"
+        Created-By: "skydag"
+
+  iam:
+    - name: "skydag-mwaa-role-${DEPLOYMENT_ID}"
+      type: execution-role
+      description: "MWAA execution role"
+      trust_policy:
+        services:
+          - airflow.amazonaws.com
+          - airflow-env.amazonaws.com
+      managed_policies:
+        - "arn:aws:iam::aws:policy/service-role/AmazonMWAAServiceRolePolicy"
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        Created-By: "skydag"
+
+  networking:
+    - description: "Using default VPC and subnets"
+      type: default-vpc
+      notes: "Production deployments should use dedicated VPC"
+
+  mwaa:
+    - name: "${DEPLOY_MWAA_ENVIRONMENT}"
+      type: environment
+      description: "Managed Airflow environment"
+      region: "${DEPLOY_AWS_REGION}"
+      config:
+        execution_role_arn: "arn:aws:iam::${ACCOUNT_ID}:role/skydag-mwaa-role-${DEPLOYMENT_ID}"
+        source_bucket_arn: "arn:aws:s3:::${DEPLOY_DAG_BUCKET}"
+        dag_s3_path: "${DEPLOY_DAG_PREFIX}/"
+        airflow_version: "2.5.1"
+        environment_class: "mw1.small"
+        max_workers: 2
+        logging_configuration:
+          dag_processing_logs: 
+            enabled: true
+            log_level: "INFO"
+          scheduler_logs:
+            enabled: true
+            log_level: "INFO"
+          task_logs:
+            enabled: true
+            log_level: "INFO"
+          webserver_logs:
+            enabled: true
+            log_level: "INFO"
+          worker_logs:
+            enabled: true
+            log_level: "INFO"
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        Created-By: "skydag"
+
+estimated_costs:
+  mwaa_environment:
+    description: "MWAA environment (small)"
+    cost_per_hour: "$0.49"
+    notes: "Base environment cost + worker hours"
+  
+  s3_storage:
+    description: "S3 storage buckets"
+    cost_per_gb_month: "$0.023"
+    notes: "Standard storage class"
+
+deployment_time:
+  total: "20-30 minutes"
+  breakdown:
+    s3_buckets: "1-2 minutes"
+    iam_role: "1 minute"
+    mwaa_environment: "20-30 minutes"

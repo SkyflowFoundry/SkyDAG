@@ -1,0 +1,95 @@
+# Azure Infrastructure Configuration Template
+# This file documents the resources that will be created
+
+infrastructure:
+  platform: azure
+  location: East US
+  subscription_id: "${DEPLOY_AZURE_SUBSCRIPTION_ID}"
+  resource_group: "${DEPLOY_AZURE_RESOURCE_GROUP}"
+
+resources:
+  resource_group:
+    - name: "${DEPLOY_AZURE_RESOURCE_GROUP}"
+      type: resource-group
+      description: "Resource group for SkyDAG deployment"
+      location: "East US"
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        Created-By: "skydag"
+
+  storage:
+    - name: "${DEPLOY_AZURE_STORAGE_ACCOUNT}"
+      type: storage-account
+      description: "Storage account for all blob containers"
+      location: "East US"
+      sku: "Standard_LRS"
+      kind: "StorageV2"
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        Created-By: "skydag"
+
+  containers:
+    - name: "${DEPLOY_DAG_BUCKET}"
+      type: blob-container
+      description: "DAG files container"
+      storage_account: "${DEPLOY_AZURE_STORAGE_ACCOUNT}"
+      metadata:
+        skydag-deployment: "${DEPLOYMENT_ID}"
+        skydag-type: "dag-container"
+        created-by: "skydag"
+    
+    - name: "${SKYDAG_SOURCE_CONTAINER}"
+      type: blob-container
+      description: "Source files for processing"
+      storage_account: "${DEPLOY_AZURE_STORAGE_ACCOUNT}"
+      metadata:
+        skydag-deployment: "${DEPLOYMENT_ID}"
+        skydag-type: "source-container"
+        created-by: "skydag"
+    
+    - name: "${SKYDAG_DEST_CONTAINER}"
+      type: blob-container
+      description: "Processed files destination"
+      storage_account: "${DEPLOY_AZURE_STORAGE_ACCOUNT}"
+      metadata:
+        skydag-deployment: "${DEPLOYMENT_ID}"
+        skydag-type: "dest-container"
+        created-by: "skydag"
+
+  data_factory:
+    - name: "${DEPLOY_AZURE_DATA_FACTORY}"
+      type: data-factory
+      description: "Data Factory for pipeline orchestration"
+      location: "East US"
+      tags:
+        SkyDAG-Deployment: "${DEPLOYMENT_ID}"
+        Created-By: "skydag"
+
+airflow_integration:
+  description: "Airflow can be deployed separately and integrated with ADF"
+  options:
+    - "Self-managed Airflow on Azure Container Instances"
+    - "Azure Kubernetes Service with Airflow Helm chart"
+    - "Azure Container Apps with Airflow"
+  notes:
+    - "ADF can trigger Airflow DAGs via REST API"
+    - "Blob storage containers accessible from Airflow"
+
+estimated_costs:
+  storage_account:
+    description: "Storage account with blob containers"
+    cost_per_gb_month: "$0.018"
+    notes: "Hot tier pricing"
+  
+  data_factory:
+    description: "Data Factory pipeline orchestration"
+    cost_per_pipeline_run: "$1.00 per 1000 runs"
+    notes: "Plus activity execution costs"
+
+deployment_time:
+  total: "5-10 minutes"
+  breakdown:
+    resource_group: "1 minute"
+    storage_account: "2-3 minutes"
+    blob_containers: "1 minute"
+    data_factory: "1-2 minutes"

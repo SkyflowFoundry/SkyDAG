@@ -1,0 +1,30 @@
+# Core dependencies
+apache-airflow>=2.5.0
+requests>=2.28.0
+python-dotenv>=0.19.0
+
+# Cloud provider dependencies (install only what you need)
+# For GCP Composer
+google-cloud-storage>=2.10.0
+google-cloud-composer>=1.10.0
+google-cloud-resource-manager>=1.10.0
+
+# For AWS MWAA
+boto3>=1.26.0
+botocore>=1.29.0
+
+# For Azure Data Factory
+azure-mgmt-datafactory>=9.0.0
+azure-mgmt-storage>=21.0.0
+azure-mgmt-resource>=23.0.0
+azure-mgmt-authorization>=4.0.0
+azure-storage-blob>=12.14.0
+azure-identity>=1.12.0
+
+# Token generation for Skyflow authentication
+pyjwt[crypto]>=2.8.0
+
+# Airflow providers (install based on your storage platform)
+apache-airflow-providers-google>=10.0.0
+apache-airflow-providers-amazon>=8.0.0  
+apache-airflow-providers-microsoft-azure>=6.0.0
