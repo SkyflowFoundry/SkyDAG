@@ -4,10 +4,9 @@ An Airflow pipeline for processing files from cloud storage through Skyflow's de
 
 ## What it does
 
-1. Discovers files in cloud storage buckets
-2. Processes each file in parallel through Skyflow detection API
+1. Ingests files in cloud storage buckets
+2. Processes each file in parallel through Skyflow Detect API for Deidentification (Tokenization)
 3. Writes processed results to destination storage 
-4. Supports partial success - successful files continue even if others fail
 
 ## Quick Start
 
