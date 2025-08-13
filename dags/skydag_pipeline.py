@@ -144,6 +144,28 @@ def get_files_to_process(**context) -> List[str]:
     return filtered_keys
 
 
+def convert_pipe_to_comma_csv(content: str) -> str:
+    """Convert pipe-delimited CSV to comma-delimited with proper field quoting"""
+    import csv
+    import io
+    
+    try:
+        # Parse pipe-delimited content
+        pipe_reader = csv.reader(io.StringIO(content), delimiter='|')
+        
+        # Convert to comma-delimited with proper quoting
+        output = io.StringIO()
+        comma_writer = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        
+        for row in pipe_reader:
+            # CSV writer automatically quotes fields containing commas
+            comma_writer.writerow(row)
+        
+        return output.getvalue()
+    except Exception as e:
+        print(f"❌ CSV conversion failed: {e}")
+        return content  # Return original if conversion fails
+
 @task
 def process_with_skyflow(file_key: str) -> dict:
     """Process a single file with Skyflow: read -> skyflow API -> return processed data"""
@@ -169,6 +191,21 @@ def process_with_skyflow(file_key: str) -> dict:
             return {"status": "skipped", "reason": "empty file"}
         
         print(f"Read {len(file_data)} bytes from {file_key}")
+        
+        # Step 1.5: Convert pipe-delimited CSV if needed
+        if file_key.lower().endswith('.csv'):
+            try:
+                content = file_data.decode('utf-8')
+                # Detect pipe-delimited CSV (simple heuristic)
+                first_line = content.split('\n')[0] if content else ""
+                if '|' in first_line and first_line.count('|') > first_line.count(','):
+                    print(f"🔄 Converting pipe-delimited CSV: {file_key}")
+                    converted_content = convert_pipe_to_comma_csv(content)
+                    file_data = converted_content.encode('utf-8')
+                    print(f"✅ CSV conversion completed: {len(file_data)} bytes")
+            except Exception as e:
+                print(f"⚠️  CSV conversion failed, using original: {e}")
+                # Continue with original data
     except Exception as e:
         print(f"Failed to read {file_key}: {e}")
         raise

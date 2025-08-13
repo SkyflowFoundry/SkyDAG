@@ -1,0 +1,101 @@
+customer_id,country_code,first_name,last_name,email,phone,customer_segment,primary_product_type,customer_account_tier,account_number,service_channel,digital_adoption_level,statement_preference,region,source_system,fee_plan,date_of_birth,address_line1,city
+US-CUST00000001,US,勇,杨,cemrs5llg1@example.com,+1-654-684-2607,SMB,Commercial Loan,Platinum,8965040177076991,Branch,High,E-Statement,NA,online_signup,Flat,1984-06-17,7404 Birch Way,Atlanta
+CUST00000002-CN,CN,Parker,Garcia,gyykm8ms7l@mail.test,+86 18658096045,SMB,Mortgage,Silver,628796655670145515,Online,Low,E-Statement,APAC,branch_import,Usage-Based,1954-10-04,81 Rue de Rivoli,Bordeaux
+US-CUST00000003,US,伟,刘,a1vb9uujku@mail.test,+1-939-348-5826,MID,Retail Checking,Bronze,7968906716054885,RM Assisted,High,Paper,NA,crm,Tiered,1996-11-16,7880 Sunset Blvd,Los Angeles
+US-CUST00000004,US,Sam,Davis,fnu42vmnzz@sample.org,+1-610-710-3029,MID,Commercial Loan,Platinum,3241124739218701,Branch,High,E-Statement,NA,legacy_core,Flat,1969-02-01,100 Rue de la Paix,Toulouse
+CUST00000005,FR,Manon,Mercier,n6ky5wz96i@mail.test,+33 5 08 33 35 52,CORP,Mortgage,Gold,FR58 2748 3218 69565546195,Branch,High,Paper,EU,legacy_core,Usage-Based,1999-09-02,5990 Pine Rd,Seattle
+FR-CUST00000006,FR,Zoé,Roux,v0tim9ug2p@example.com,+33 6 79 61 20 13,CORP,Retail Checking,Gold,FR52 1806 4840 65873428148,Branch,Low,E-Statement,EU,online_signup,Usage-Based,1970-04-20,新华街713号,西安
+CUST00000007,US,娜,周,fjtg5u4ami@mail.test,+1-227-936-6453,SMB,Retail Checking,Platinum,9464724815054726,Branch,Medium,E-Statement,NA,online_signup,Flat,1997-01-10,3714 Willow Dr,Miami
+FR-CUST00000008,FR,Logan,Garcia,5pyc6xpe5m@sample.org,+33 8 10 62 38 52,MID,Mortgage,Bronze,FR40 7298 4552 42189956591,RM Assisted,Low,Paper,EU,crm,Tiered,1989-01-15,胜利路572号,苏州
+CUST00000009-CA,CA,Sam,Brown,iqf95if7x2@example.com,+1-408-606-6399,MID,Commercial Loan,Private,6659949961404472,Mobile,Low,E-Statement,NA,online_signup,Usage-Based,1955-12-01,5901 Willow Dr,Boston
+FR-CUST00000010,FR,Parker,Garcia,2u5pmzqblc@sample.org,+33 7 71 85 11 08,MID,Investment Advisory,Gold,FR11 8473 8966 94522846801,RM Assisted,Low,E-Statement,EU,branch_import,Tiered,1956-01-26,文化路229号,西安
+CUST00000011-CA,CA,Jordan,Brown,ygjslvmv61@example.com,+1-778-567-5510,SMB,Commercial Loan,Gold,9508420737902795,RM Assisted,Medium,E-Statement,NA,online_signup,Flat,1957-05-30,新华街583号,天津
+CUST00000012,CN,Quinn,Johnson,48wt9fbtie@example.com,+86 13172381007,SMB,Commercial Loan,Platinum,628038537269616924,RM Assisted,Medium,Paper,APAC,online_signup,Usage-Based,1985-06-11,81 Rue de la République,Paris
+CUST00000013-CN,CN,Alex,Johnson,6k91tvktvl@example.com,+86 16391889182,SMB,Mortgage,Platinum,626087319098091768,RM Assisted,Low,Paper,APAC,crm,Tiered,1968-09-26,5446 Oak St,Phoenix
+CUST00000014,CA,Manon,Leroy,wj9dmu8x58@example.com,+1-900-948-9603,SMB,Wealth Mgmt,Gold,2237540478615770,RM Assisted,Low,Paper,NA,branch_import,Tiered,1994-11-03,9155 Willow Dr,Seattle
+CUST00000015-CN,CN,鑫,杨,spr8my34aa@mail.test,+86 17170912872,MID,Wealth Mgmt,Gold,629952045758435959,Online,Medium,E-Statement,APAC,branch_import,Flat,1956-09-07,7472 Cedar Ln,Los Angeles
+FR-CUST00000016,FR,Riley,Anderson,3ysat53iko@sample.org,+33 5 85 18 27 81,SMB,Commercial Loan,Private,FR11 6387 6642 86550006154,RM Assisted,High,Paper,EU,legacy_core,Flat,1988-03-06,5136 Birch Way,Denver
+CUST00000017,US,Quinn,Jones,4aqzbov12d@example.com,+1-284-496-2819,MID,Investment Advisory,Silver,0486350152586726,Mobile,Medium,Paper,NA,branch_import,Tiered,2005-10-21,中山路90号,西安
+CUST00000018-CA,CA,Morgan,Johnson,9btpfgeoo7@example.com,+1-322-547-2863,SMB,Investment Advisory,Platinum,2090680945585518,Online,Low,E-Statement,NA,online_signup,Tiered,1945-03-28,1857 Birch Way,Boston
+CUST00000019,FR,军,王,vk4rqwq0c0@sample.org,+33 8 87 83 73 74,MID,Commercial Loan,Gold,FR23 0899 7832 69959325862,Branch,Medium,Paper,EU,online_signup,Tiered,1957-11-24,146 Avenue Victor Hugo,Bordeaux
+CUST00000020-CA,CA,静,赵,14jklyaxb5@mail.test,+1-924-496-1603,MID,Wealth Mgmt,Bronze,5570617445097147,Branch,Low,E-Statement,NA,legacy_core,Tiered,1942-10-16,人民路581号,深圳
+CUST00000021-CA,CA,Camille,Michel,rruuv200t9@mail.test,+1-783-355-8739,MID,Investment Advisory,Silver,7017365846034166,RM Assisted,Low,Paper,NA,legacy_core,Usage-Based,1955-11-04,105 Rue de la République,Strasbourg
+CUST00000022,CN,Parker,Martin,x8e9ezvohg@example.com,+86 15935005109,CORP,Wealth Mgmt,Silver,626214404123814009,Branch,High,E-Statement,APAC,legacy_core,Flat,1972-05-27,建设路350号,成都
+CUST00000023-CA,CA,Alex,Anderson,sg3bj0clh1@mail.test,+1-296-406-1640,MID,Mortgage,Silver,1944836144673521,Branch,Medium,Paper,NA,branch_import,Usage-Based,1947-06-16,胜利路63号,深圳
+CUST00000024,US,Inès,Fontaine,lipxgodql3@example.com,+1-658-495-8220,CORP,Retail Checking,Gold,3386260089894195,Mobile,Low,Paper,NA,online_signup,Usage-Based,1992-05-08,5130 Oak St,Denver
+CUST00000025-CA,CA,Thomas,Michel,wluv9rdukx@mail.test,+1-309-404-6154,CORP,Wealth Mgmt,Silver,0550796247385060,Online,Low,E-Statement,NA,branch_import,Usage-Based,1975-07-04,25 Rue de Rivoli,Paris
+FR-CUST00000026,FR,Harper,Thompson,vu0klljxit@mail.test,+33 8 29 05 12 50,MID,Retail Checking,Silver,FR60 4746 4666 42382517998,Online,High,E-Statement,EU,crm,Flat,1948-12-07,和平街326号,广州
+CUST00000027-CA,CA,Taylor,Jones,kww7ndu7pr@mail.test,+1-956-740-7300,CORP,Wealth Mgmt,Gold,3753337174995085,Online,Low,E-Statement,NA,branch_import,Usage-Based,1985-09-30,464 Elm St,Miami
+FR-CUST00000028,FR,Logan,Jones,lsintrggpe@sample.org,+33 5 69 26 64 29,SMB,Mortgage,Bronze,FR28 1627 8874 27353138717,RM Assisted,Low,E-Statement,EU,online_signup,Usage-Based,1967-12-22,和平街511号,深圳
+CUST00000029-CA,CA,杰,黄,hivh1s3qm2@example.com,+1-595-858-5740,MID,Wealth Mgmt,Private,1267311660019696,Online,Medium,Paper,NA,branch_import,Usage-Based,1981-12-21,文化路637号,杭州
+FR-CUST00000030,FR,Zoé,Michel,6zlt60x8fy@sample.org,+33 2 92 18 97 94,CORP,Investment Advisory,Private,FR69 6055 4352 52372939490,Branch,Medium,Paper,EU,crm,Usage-Based,1970-03-06,3575 Maple Ave,Denver
+CUST00000031-CN,CN,杰,张,whn0ujtqpw@example.com,+86 16684563278,SMB,Mortgage,Gold,622141890675741755,RM Assisted,Low,E-Statement,APAC,crm,Flat,1966-03-17,685 Cedar Ln,Phoenix
+CUST00000032-CN,CN,Louis,Leroy,mpvxxgf8fv@example.com,+86 15504410116,MID,Retail Checking,Silver,621672623295269363,Online,Medium,E-Statement,APAC,online_signup,Flat,1965-04-03,173 Boulevard Saint-Germain,Bordeaux
+CUST00000033-CA,CA,勇,杨,ugo2xp2ruk@mail.test,+1-375-515-7222,MID,Retail Checking,Platinum,1071006803480418,RM Assisted,Low,Paper,NA,online_signup,Flat,1969-05-27,87 Boulevard Saint-Germain,Bordeaux
+FR-CUST00000034,FR,Morgan,Wilson,0fyvld39to@mail.test,+33 7 91 94 19 07,SMB,Investment Advisory,Platinum,FR67 2140 8228 29138862841,Branch,High,E-Statement,EU,legacy_core,Flat,1984-08-03,胜利路501号,杭州
+CUST00000035-CN,CN,Alex,Miller,k6jlsg34qt@mail.test,+86 16740743596,CORP,Commercial Loan,Gold,622438694286864718,Branch,High,E-Statement,APAC,legacy_core,Flat,1976-05-31,文化路554号,杭州
+CUST00000036-CN,CN,婷,黄,bouoolozg3@example.com,+86 17220801921,CORP,Retail Checking,Platinum,620097333409403341,RM Assisted,High,E-Statement,APAC,branch_import,Tiered,1957-03-11,文化路721号,天津
+FR-CUST00000037,FR,Thomas,Dubois,c2m71s6jie@example.com,+33 9 04 27 80 77,CORP,Mortgage,Platinum,FR75 4239 7459 04299049206,RM Assisted,High,E-Statement,EU,legacy_core,Flat,1988-04-19,7454 Cedar Ln,Chicago
+CUST00000038-CN,CN,Parker,Smith,my4zms0vzf@example.com,+86 14505531980,SMB,Commercial Loan,Private,623791708424389178,Mobile,High,E-Statement,APAC,branch_import,Usage-Based,1972-04-29,9013 Maple Ave,Miami
+CUST00000039-CN,CN,Jordan,Garcia,cl4jxpwdko@sample.org,+86 15398475517,CORP,Investment Advisory,Bronze,629727046454556797,Branch,Low,E-Statement,APAC,branch_import,Usage-Based,1945-02-14,人民路593号,北京
+US-CUST00000040,US,Taylor,Brown,1uuso07xbf@example.com,+1-233-597-5591,SMB,Commercial Loan,Gold,4911579306777707,Branch,Low,E-Statement,NA,online_signup,Tiered,2005-11-17,1261 Pine Rd,Atlanta
+CUST00000041,FR,Louis,Fontaine,fna9fjqftf@sample.org,+33 8 11 81 27 70,SMB,Investment Advisory,Silver,FR18 2499 3875 05297512133,Online,High,Paper,EU,legacy_core,Usage-Based,1983-08-22,9 Rue de Rivoli,Paris
+CUST00000042,US,Casey,Smith,ge9dvsdbl4@example.com,+1-587-572-4818,CORP,Wealth Mgmt,Private,4633464128351666,Mobile,High,Paper,NA,branch_import,Tiered,1953-01-28,8352 Maple Ave,Denver
+CUST00000043,FR,Nathan,Lefebvre,y1dk973jmp@example.com,+33 6 47 22 41 60,CORP,Mortgage,Platinum,FR82 3874 8866 19825873986,Mobile,Low,Paper,EU,crm,Flat,1995-05-11,新华街168号,广州
+CUST00000044,FR,Alex,Brown,zxp2s2s882@mail.test,+33 7 44 94 56 65,CORP,Wealth Mgmt,Silver,FR94 1784 4808 93110063986,Branch,High,Paper,EU,legacy_core,Usage-Based,1941-04-17,4011 Sunset Blvd,Atlanta
+CUST00000045-CN,CN,Morgan,Johnson,0tzwjmq6gz@mail.test,+86 15460286575,MID,Retail Checking,Private,628326804581702362,RM Assisted,High,E-Statement,APAC,branch_import,Flat,1999-07-26,7443 Birch Way,Seattle
+CUST00000046,CN,Alex,Thompson,gengp70ek6@mail.test,+86 13459508492,CORP,Wealth Mgmt,Private,628034433540480292,RM Assisted,Low,E-Statement,APAC,legacy_core,Usage-Based,1963-09-19,3777 Oak St,New York
+CUST00000047,CN,Harper,Jones,39ux426y6p@mail.test,+86 15787597287,SMB,Commercial Loan,Gold,626163329196170396,RM Assisted,High,E-Statement,APAC,legacy_core,Tiered,1979-07-07,2634 Elm St,Denver
+FR-CUST00000048,FR,Zoé,Roux,nkmerb7ip6@sample.org,+33 8 99 79 53 84,MID,Mortgage,Silver,FR56 6047 6988 94323866556,Mobile,High,Paper,EU,branch_import,Flat,1985-11-18,1069 Cedar Ln,New York
+CUST00000049,CA,鑫,赵,hqm8xifgsf@example.com,+1-345-628-5590,SMB,Commercial Loan,Private,0225099357745585,Mobile,Medium,Paper,NA,crm,Flat,1969-08-10,新华街455号,西安
+CUST00000050-CN,CN,Harper,Anderson,8vrqojdjx1@mail.test,+86 18677457265,CORP,Mortgage,Platinum,624093225703669173,Branch,High,E-Statement,APAC,crm,Tiered,2000-02-19,1871 Main St,Denver
+US-CUST00000051,US,Alex,Jones,p3i5alrduh@mail.test,+1-750-853-4549,SMB,Mortgage,Platinum,5770828450333872,Branch,High,E-Statement,NA,branch_import,Usage-Based,1996-06-30,3090 Cedar Ln,Dallas
+CUST00000052-CN,CN,Alex,Brown,7dqzpsrj24@mail.test,+86 15080941160,MID,Retail Checking,Bronze,622822127206421525,Online,High,Paper,APAC,branch_import,Flat,1957-07-27,和平街659号,深圳
+CUST00000053,US,涛,王,8iga3y2z9m@mail.test,+1-729-426-2638,MID,Investment Advisory,Silver,5749034646669040,Branch,High,Paper,NA,online_signup,Flat,1961-07-19,974 Pine Rd,Chicago
+FR-CUST00000054,FR,Morgan,Miller,2lvuh41slx@sample.org,+33 4 60 20 07 16,SMB,Investment Advisory,Platinum,FR39 2749 8545 56374389721,Mobile,High,Paper,EU,crm,Flat,1963-02-17,6932 Birch Way,Phoenix
+CUST00000055,US,Logan,Martin,9rr7lajysj@mail.test,+1-781-619-5575,MID,Mortgage,Silver,3790135535492450,Mobile,Medium,Paper,NA,online_signup,Usage-Based,1975-07-18,建设路816号,南京
+US-CUST00000056,US,霞,赵,0fedndy4pi@sample.org,+1-547-543-4736,SMB,Mortgage,Silver,8489231951840987,Online,High,E-Statement,NA,branch_import,Flat,1948-07-03,1743 2nd St,Dallas
+CUST00000057-CA,CA,Manon,Bertrand,zzs9ltus6i@example.com,+1-317-822-2764,MID,Mortgage,Platinum,1358282277993268,Online,High,Paper,NA,crm,Tiered,1988-12-17,3240 Sunset Blvd,Atlanta
+CUST00000058-CN,CN,Lucas,Laurent,7o5880u54h@sample.org,+86 13181023493,SMB,Mortgage,Private,623754079934139753,Online,High,Paper,APAC,legacy_core,Tiered,1955-01-09,8286 Oak St,Denver
+CUST00000059,CN,敏,赵,jvif33plfe@example.com,+86 17191135272,MID,Retail Checking,Bronze,624264748131829168,Mobile,Medium,Paper,APAC,online_signup,Flat,1981-10-30,8091 Sunset Blvd,Miami
+US-CUST00000060,US,超,李,4lcrwfgvx9@example.com,+1-510-341-6621,CORP,Retail Checking,Silver,0725897535264697,Mobile,Medium,Paper,NA,online_signup,Tiered,1978-10-07,4763 Oak St,Denver
+US-CUST00000061,US,Taylor,Anderson,309u3r4b4z@sample.org,+1-417-806-7678,SMB,Mortgage,Private,3061681293967955,Online,Medium,Paper,NA,legacy_core,Usage-Based,1957-09-04,1234 Maple Ave,Atlanta
+CUST00000062-CN,CN,Taylor,Martin,fk0bp3rduw@mail.test,+86 15509465639,SMB,Mortgage,Platinum,624165621512723829,Mobile,Low,Paper,APAC,legacy_core,Usage-Based,1989-01-12,3147 Cedar Ln,Denver
+US-CUST00000063,US,Logan,Brown,c3bz8a5aqw@example.com,+1-672-324-1472,CORP,Mortgage,Private,1902654314050990,Branch,High,Paper,NA,crm,Usage-Based,1947-07-11,7298 Cedar Ln,Los Angeles
+CUST00000064-CA,CA,鑫,杨,7r7b0gfc49@sample.org,+1-435-682-2463,CORP,Mortgage,Private,3079780402452464,Branch,Medium,Paper,NA,online_signup,Usage-Based,1948-01-19,解放路981号,杭州
+US-CUST00000065,US,Thomas,Roux,3ck5zy6tnb@mail.test,+1-438-788-1989,SMB,Mortgage,Silver,7572010251630563,RM Assisted,Low,E-Statement,NA,online_signup,Flat,1949-12-06,29 Rue de la République,Toulouse
+US-CUST00000066,US,娟,李,1jddedt6dd@mail.test,+1-636-841-9531,SMB,Retail Checking,Silver,8241899162322716,Mobile,Medium,E-Statement,NA,online_signup,Usage-Based,2003-04-12,7466 Maple Ave,New York
+FR-CUST00000067,FR,Casey,Johnson,i3xm2n8aeh@example.com,+33 8 69 00 27 88,CORP,Mortgage,Platinum,FR52 6883 2588 82424084449,Online,Low,E-Statement,EU,branch_import,Usage-Based,1943-05-19,1404 Willow Dr,New York
+CUST00000068,CN,杰,周,f529ccyd62@sample.org,+86 14617539104,CORP,Mortgage,Bronze,626596432140785067,Mobile,Low,E-Statement,APAC,branch_import,Tiered,2003-09-19,5663 Sunset Blvd,Miami
+CUST00000069-CN,CN,Inès,Michel,24qad3270e@sample.org,+86 16309907572,CORP,Investment Advisory,Platinum,628245986165044499,RM Assisted,Low,E-Statement,APAC,branch_import,Flat,1952-01-21,178 Boulevard Saint-Germain,Nantes
+CUST00000070-CN,CN,磊,赵,p9ufjc0hyc@mail.test,+86 18420407242,MID,Retail Checking,Bronze,625047185531374806,Mobile,High,E-Statement,APAC,crm,Tiered,1946-04-07,人民路145号,天津
+CUST00000071-CN,CN,霞,陈,789vszrp2u@mail.test,+86 17793329341,CORP,Mortgage,Platinum,628365431897248629,RM Assisted,Low,E-Statement,APAC,crm,Tiered,1986-01-07,建设路508号,杭州
+CUST00000072,CA,Morgan,Martin,g9texnsqks@mail.test,+1-361-628-8702,MID,Wealth Mgmt,Bronze,4257193214722561,Branch,Low,Paper,NA,legacy_core,Usage-Based,1987-11-01,9219 Main St,Seattle
+CUST00000073-CN,CN,Harper,Miller,mpi1ifjs6l@mail.test,+86 18905425722,CORP,Investment Advisory,Silver,626807309494690721,Online,Low,E-Statement,APAC,crm,Flat,1984-04-07,6673 Willow Dr,Chicago
+FR-CUST00000074,FR,Taylor,Brown,uxfda7c9mg@example.com,+33 4 31 68 79 96,MID,Wealth Mgmt,Platinum,FR12 5772 0997 17299855374,Online,Medium,E-Statement,EU,legacy_core,Usage-Based,1942-10-17,4410 Birch Way,New York
+US-CUST00000075,US,Avery,Johnson,gx0ayyjon8@mail.test,+1-609-384-3861,CORP,Retail Checking,Silver,3352694292354839,Branch,Medium,Paper,NA,online_signup,Usage-Based,1982-06-05,4953 Birch Way,Phoenix
+CUST00000076-CN,CN,Casey,Miller,nz7ztkgph3@sample.org,+86 16566506509,SMB,Wealth Mgmt,Private,623116509688938079,Mobile,Medium,E-Statement,APAC,online_signup,Tiered,1988-06-10,175 Boulevard Saint-Germain,Lyon
+FR-CUST00000077,FR,洋,李,dtq1r8y3ml@sample.org,+33 8 40 06 23 79,MID,Wealth Mgmt,Bronze,FR56 7089 5882 97426246391,Online,High,Paper,EU,crm,Tiered,1964-06-02,3270 Cedar Ln,Seattle
+CUST00000078-CN,CN,Thomas,Simon,3mme76bwia@mail.test,+86 18651194915,SMB,Wealth Mgmt,Platinum,627269282209766696,Online,Low,E-Statement,APAC,legacy_core,Flat,1979-03-24,人民路224号,北京
+FR-CUST00000079,FR,伟,张,h9bj39nwnk@sample.org,+33 2 37 47 75 13,CORP,Mortgage,Silver,FR70 0769 4312 40516875784,Online,High,Paper,EU,branch_import,Flat,2002-11-29,2723 Main St,Chicago
+CUST00000080,CN,Manon,Mercier,kga9al272v@mail.test,+86 18254101138,CORP,Mortgage,Gold,628376990595492979,Mobile,Low,Paper,APAC,branch_import,Usage-Based,2004-04-15,建设路241号,成都
+FR-CUST00000081,FR,伟,王,qhbxuqqr4h@mail.test,+33 2 78 45 65 60,MID,Investment Advisory,Bronze,FR95 6201 8666 10630959578,Online,High,Paper,EU,legacy_core,Usage-Based,1941-01-15,7965 Willow Dr,Dallas
+CUST00000082,CN,勇,吴,7bckm7znop@example.com,+86 14516360015,CORP,Wealth Mgmt,Gold,622441029089743589,RM Assisted,Low,E-Statement,APAC,branch_import,Usage-Based,1943-10-07,1026 Elm St,Boston
+FR-CUST00000083,FR,杰,李,gz7l21o2nx@sample.org,+33 1 61 70 69 84,MID,Retail Checking,Private,FR49 4288 1705 73951153362,Online,High,E-Statement,EU,online_signup,Usage-Based,1940-11-28,4814 Sunset Blvd,Chicago
+CUST00000084-CN,CN,Casey,Garcia,ovasn8w5mq@mail.test,+86 18635682541,MID,Wealth Mgmt,Private,623899652762072768,Online,High,Paper,APAC,branch_import,Flat,1979-06-24,1632 Main St,Atlanta
+US-CUST00000085,US,Quinn,Wilson,rdwod19lot@example.com,+1-777-746-5440,MID,Commercial Loan,Bronze,5313534625938462,RM Assisted,Medium,E-Statement,NA,branch_import,Tiered,1958-04-20,4387 Pine Rd,Phoenix
+CUST00000086-CN,CN,Harper,Wilson,1u2k8tarrx@sample.org,+86 17637859923,MID,Investment Advisory,Silver,629449970882649684,Mobile,Low,E-Statement,APAC,branch_import,Flat,1943-12-13,建设路114号,杭州
+CUST00000087-CN,CN,Morgan,Anderson,d39pn4mewz@example.com,+86 16314999610,CORP,Mortgage,Bronze,626446170231311061,RM Assisted,High,Paper,APAC,online_signup,Usage-Based,1948-09-02,4781 Main St,New York
+FR-CUST00000088,FR,Avery,Smith,hlnft0tnk3@example.com,+33 8 76 71 36 20,CORP,Investment Advisory,Bronze,FR22 4117 1593 50323645182,Branch,Medium,Paper,EU,legacy_core,Usage-Based,1940-05-18,9210 Birch Way,Dallas
+US-CUST00000089,US,Avery,Martin,qxwpr20hxa@example.com,+1-647-568-8285,MID,Investment Advisory,Platinum,2065072230627549,RM Assisted,High,Paper,NA,legacy_core,Usage-Based,1996-07-15,71 Rue de la République,Marseille
+CUST00000090,FR,Sam,Anderson,9q5sdgrtp5@mail.test,+33 5 08 08 87 37,SMB,Mortgage,Platinum,FR17 9194 9401 87312574099,Branch,Low,E-Statement,EU,online_signup,Flat,1961-09-19,5428 Elm St,Los Angeles
+US-CUST00000091,US,Thomas,Bertrand,e41q7bedp8@example.com,+1-762-989-7726,SMB,Commercial Loan,Bronze,4393437464752678,Online,Medium,Paper,NA,legacy_core,Flat,1956-10-15,149 Rue de la République,Marseille
+FR-CUST00000092,FR,Sam,Thompson,h76uodp9nf@mail.test,+33 8 89 41 33 58,MID,Mortgage,Gold,FR92 9849 8134 14669726443,Online,Medium,E-Statement,EU,online_signup,Tiered,1980-06-15,4171 Willow Dr,Boston
+FR-CUST00000093,FR,Thomas,Bertrand,1vulg7ew5t@example.com,+33 8 11 40 29 59,MID,Wealth Mgmt,Silver,FR91 6047 8862 56259772369,Mobile,High,Paper,EU,crm,Flat,1988-06-02,3580 Sunset Blvd,Phoenix
+CUST00000094,CA,Avery,Davis,pyuvxlvn5s@sample.org,+1-682-305-8528,SMB,Mortgage,Gold,4384956092549484,Online,Low,E-Statement,NA,branch_import,Usage-Based,1961-11-22,133 Avenue Victor Hugo,Nice
+CUST00000095,CN,Inès,David,agr55biw5d@example.com,+86 14584796676,CORP,Retail Checking,Silver,629695842940277077,Branch,High,Paper,APAC,branch_import,Tiered,1959-02-23,5995 Oak St,Los Angeles
+FR-CUST00000096,FR,Jordan,Williams,9ijzulh92v@sample.org,+33 7 34 26 79 47,MID,Retail Checking,Platinum,FR53 3654 1852 49693056161,Branch,Medium,E-Statement,EU,crm,Usage-Based,1960-01-09,解放路786号,上海
+FR-CUST00000097,FR,Sam,Thompson,ms4eww4ig9@example.com,+33 4 71 51 86 03,MID,Mortgage,Silver,FR36 0502 3916 82352273796,RM Assisted,Low,Paper,EU,online_signup,Usage-Based,1960-01-29,解放路513号,深圳
+CUST00000098-CA,CA,Parker,Garcia,99yrfs28q7@sample.org,+1-442-452-9165,CORP,Retail Checking,Platinum,5181362037136168,Branch,Medium,Paper,NA,crm,Usage-Based,2004-10-05,146 Avenue Victor Hugo,Strasbourg
+CUST00000099,FR,Sam,Miller,5se8kkbgr4@example.com,+33 5 23 86 17 86,CORP,Investment Advisory,Platinum,FR15 8650 6341 81873983527,Branch,Low,E-Statement,EU,crm,Flat,1940-10-13,9144 Elm St,Phoenix
+CUST00000100-CN,CN,浩,周,c6ao97dse8@example.com,+86 18269002498,CORP,Investment Advisory,Silver,627611309270952397,Branch,Medium,E-Statement,APAC,legacy_core,Flat,1973-06-08,建设路690号,深圳
