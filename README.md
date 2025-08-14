@@ -15,7 +15,7 @@ Skyflow Detect is a data protection service that automatically identifies, class
 
 SkyDAG is a complete implementation accelerator that packages Skyflow Detect capabilities within a fully deployable Apache Airflow DAG, enabling:
 
-1. **Automated File Processing**: Monitors cloud storage buckets and automatically processes new files
+1. **File Processing**: Processes files from cloud storage buckets through triggered workflows
 2. **Parallel Data Protection**: Processes multiple files simultaneously through Skyflow Detect API with intelligent tokenization
 3. **Smart Token Selection**: Automatically selects appropriate token types based on file format (vault tokens for text, entity counters for binary)
 4. **Production Infrastructure**: Complete cloud deployment with managed Airflow (Composer/MWAA), storage, and IAM
@@ -28,7 +28,7 @@ SkyDAG is a complete implementation accelerator that packages Skyflow Detect cap
 Cloud Storage → SkyDAG Pipeline → Skyflow Detect API → Protected Data Storage
 ```
 
-1. **Ingestion**: Files uploaded to source bucket are processed via manual triggers
+1. **Ingestion**: Files in source bucket are processed via triggered workflows
 2. **Detection**: Skyflow Detect identifies and classifies sensitive data
 3. **Protection**: Advanced tokenization de-identifies sensitive elements
 4. **Output**: Protected files written to destination storage with full audit trail 

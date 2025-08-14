@@ -144,6 +144,55 @@ def get_files_to_process(**context) -> List[str]:
     return filtered_keys
 
 
+def detect_and_convert_encoding(file_data: bytes, filename: str) -> tuple[bytes, str]:
+    """
+    Detect file encoding and convert to UTF-8 if needed
+    Built-in support for EBCDIC and other encodings - no configuration required
+    """
+    # Standard detection order (most common first for performance)
+    encodings_to_try = [
+        'utf-8',           # Try UTF-8 first (most common)
+        'cp037',           # IBM EBCDIC US/Canada
+        'cp500',           # IBM EBCDIC International  
+        'cp1047',          # IBM EBCDIC Latin-1
+        'cp273',           # IBM EBCDIC Germany
+        'cp277',           # IBM EBCDIC Denmark/Norway
+        'cp278',           # IBM EBCDIC Finland/Sweden
+        'latin1',          # European fallback
+        'windows-1252'     # Windows fallback
+    ]
+    
+    for encoding in encodings_to_try:
+        try:
+            decoded_text = file_data.decode(encoding)
+            # Validation: check if it looks like CSV
+            if validate_csv_structure(decoded_text):
+                if encoding != 'utf-8':
+                    print(f"🔄 Detected {encoding}, converting to UTF-8: {filename}")
+                return decoded_text.encode('utf-8'), encoding
+        except UnicodeDecodeError:
+            continue
+    
+    raise ValueError(f"Could not detect valid encoding for {filename}")
+
+
+def validate_csv_structure(content: str) -> bool:
+    """Validate that decoded content looks like CSV"""
+    lines = content.split('\n')[:5]  # Check first 5 lines
+    
+    for line in lines:
+        if not line.strip():
+            continue
+        
+        # Look for CSV delimiters
+        if ',' in line or '|' in line or ';' in line:
+            # Check for printable characters (not control chars)
+            if all(ord(c) >= 32 or c in '\n\r\t' for c in line):
+                return True
+    
+    return False
+
+
 def convert_pipe_to_comma_csv(content: str) -> str:
     """Convert pipe-delimited CSV to comma-delimited with proper field quoting"""
     import csv
@@ -165,6 +214,73 @@ def convert_pipe_to_comma_csv(content: str) -> str:
     except Exception as e:
         print(f"❌ CSV conversion failed: {e}")
         return content  # Return original if conversion fails
+
+
+def convert_semicolon_to_comma_csv(content: str) -> str:
+    """Convert semicolon-delimited CSV to comma-delimited with proper field quoting"""
+    import csv
+    import io
+    
+    try:
+        # Parse semicolon-delimited content
+        semicolon_reader = csv.reader(io.StringIO(content), delimiter=';')
+        
+        # Convert to comma-delimited with proper quoting
+        output = io.StringIO()
+        comma_writer = csv.writer(output, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        
+        for row in semicolon_reader:
+            # CSV writer automatically quotes fields containing commas
+            comma_writer.writerow(row)
+        
+        return output.getvalue()
+    except Exception as e:
+        print(f"❌ CSV conversion failed: {e}")
+        return content  # Return original if conversion fails
+
+
+def clean_mainframe_csv(content: str) -> str:
+    """Clean common mainframe CSV export issues"""
+    import re
+    
+    lines = []
+    for line in content.split('\n'):
+        if line:
+            # Remove trailing spaces from fields (common in fixed-width exports)
+            cleaned_line = re.sub(r'\s+,', ',', line)  # Remove spaces before commas
+            cleaned_line = re.sub(r',\s+', ',', cleaned_line)  # Remove spaces after commas
+            lines.append(cleaned_line)
+        else:
+            lines.append(line)
+    
+    return '\n'.join(lines)
+
+
+def enhanced_csv_processing(file_data: bytes, filename: str) -> bytes:
+    """
+    Always-on CSV processing with encoding + delimiter support
+    Handles UTF-8, EBCDIC, and various delimiter formats automatically
+    """
+    # Step 1: Always try encoding detection
+    utf8_data, detected_encoding = detect_and_convert_encoding(file_data, filename)
+    content = utf8_data.decode('utf-8')
+    
+    # Step 2: Always check for different delimiters
+    first_line = content.split('\n')[0] if content else ""
+    
+    if '|' in first_line and first_line.count('|') > first_line.count(','):
+        print(f"🔄 Converting pipe-delimited CSV: {filename}")
+        content = convert_pipe_to_comma_csv(content)
+    elif ';' in first_line and first_line.count(';') > first_line.count(','):
+        print(f"🔄 Converting semicolon-delimited CSV: {filename}")  
+        content = convert_semicolon_to_comma_csv(content)
+    
+    # Step 3: Clean mainframe artifacts if detected
+    if detected_encoding.startswith('cp'):  # EBCDIC encodings
+        content = clean_mainframe_csv(content)
+        print(f"🧹 Applied mainframe data cleaning: {filename}")
+    
+    return content.encode('utf-8')
 
 @task
 def process_with_skyflow(file_key: str) -> dict:
@@ -192,19 +308,13 @@ def process_with_skyflow(file_key: str) -> dict:
         
         print(f"Read {len(file_data)} bytes from {file_key}")
         
-        # Step 1.5: Convert pipe-delimited CSV if needed
+        # Step 1.5: Enhanced CSV processing with encoding detection and delimiter support
         if file_key.lower().endswith('.csv'):
             try:
-                content = file_data.decode('utf-8')
-                # Detect pipe-delimited CSV (simple heuristic)
-                first_line = content.split('\n')[0] if content else ""
-                if '|' in first_line and first_line.count('|') > first_line.count(','):
-                    print(f"🔄 Converting pipe-delimited CSV: {file_key}")
-                    converted_content = convert_pipe_to_comma_csv(content)
-                    file_data = converted_content.encode('utf-8')
-                    print(f"✅ CSV conversion completed: {len(file_data)} bytes")
+                file_data = enhanced_csv_processing(file_data, file_key)
+                print(f"✅ Enhanced CSV processing completed: {len(file_data)} bytes")
             except Exception as e:
-                print(f"⚠️  CSV conversion failed, using original: {e}")
+                print(f"⚠️  Enhanced CSV processing failed, using original: {e}")
                 # Continue with original data
     except Exception as e:
         print(f"Failed to read {file_key}: {e}")
